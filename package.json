@@ -1,0 +1,22 @@
+{
+  "name": "paw4c",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm help"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaruzalito/PAW4C.git"
+  },
+  "keywords": [
+    "fortnite"
+  ],
+  "author": "Marcel Jaruzal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaruzalito/PAW4C/issues"
+  },
+  "homepage": "https://github.com/jaruzalito/PAW4C#readme"
+}

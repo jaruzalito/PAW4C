@@ -2,6 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const mime = require('mime-types')
 
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
@@ -58,17 +59,24 @@ const server = http.createServer((req, res) => {
                 console.log(`Parameters written to file: ${fileName}`);
             }
         });
-
-        // Return a JSON response with {'ok': 'ok'}
         res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
         const jsonResponse = {
             ok: 'ok'
         };
         res.end(JSON.stringify(jsonResponse));
     }
-    else {
-        res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-        res.end('404 Not Found');
+    else  {
+        // fs.readFile(`${__dirname}/assets/${req.url}`,(err, data) => {
+        //     if (err) {
+        //         console.error(err);
+        //         res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        //         res.statusCode = 404;
+        //         res.write(JSON.stringify({error: 404}));
+        //         res.end();
+        //     }else{
+        //         let type = mime.getTy
+        //     }
+        // })
     }
 });
 const PORT = 3000;

@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/jaruzalito/PAW4C/issues"
   },
-  "homepage": "https://github.com/jaruzalito/PAW4C#readme"
+  "homepage": "https://github.com/jaruzalito/PAW4C#readme",
+  "dependencies": {
+    "mime": "^4.0.4",
+    "mime-types": "^2.1.35"
+  }
 }

@@ -66,6 +66,19 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify(jsonResponse));
     }
     else  {
+        const filePath = path.join(__dirname, 'assets', req.url);
+        fs.readFile(filePath, (err, data) => {
+            if (err) {
+                res.statusCode = 404;
+                res.setHeader('Content-Type', 'application/json; charset=utf-8');
+                res.write(JSON.stringify({ error: 404 }));
+                res.end();
+            } else {
+                const mimeType = mime.lookup(filePath);
+                res.writeHead(200, { 'Content-Type': mimeType });
+                res.end(data);
+            }
+        });
         // fs.readFile(`${__dirname}/assets/${req.url}`,(err, data) => {
         //     if (err) {
         //         console.error(err);

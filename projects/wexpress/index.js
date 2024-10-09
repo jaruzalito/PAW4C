@@ -4,8 +4,6 @@ const path = require('path')
 const mime = require('mime-types')
 
 const app = express()
-const PORT=3000
-
 app.use(express.json())
 
 app.get('/',(req,res)=>{
@@ -50,5 +48,25 @@ app.get('/get_params',(req,res)=>{
     const timestamp = Date.now()
     const fileName = `params_${timestamp}.json`
 
-    fs.writeFile(file,JSON.stringify(paramsArray),(err)=>{})
+    fs.writeFile(fileName,JSON.stringify(paramsArray),(err)=>{})
+    res.json({ ok: 'ok' })
 })
+
+app.get('*',(req,res)=>{
+    const filepath = path.join(__dirname, 'assets', req.url);
+
+    fs.readFile(filepath,(err,data)=>{
+        if(err){
+            res.status(404).json({error: 404});
+        }else{
+            const mimeType = mime.lookup(filepath);
+            res.set('Content-Type', mimeType);
+            res.send(data);
+        }
+    })
+})
+
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Serwer na http://localhost:${PORT}`);
+});

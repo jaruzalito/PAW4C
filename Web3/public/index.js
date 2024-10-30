@@ -3,13 +3,14 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const mysql = require('mysql');
+const {json} = require("express");
 
-const pool = mysql.createPool({
+const conn = mysql.createConnection({
     connectionLimit: 10,
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'expressapp',
+    database: 'messages',
     port: 3306,
 });
 
@@ -45,7 +46,7 @@ app.post('/kontakt', (req, res) => {
     var Email = req.body.email;
     var Message = req.body.wiadomosc;
 
-    pool.query('INSERT INTO messages (imie, nazwisko, email, text) VALUES (?, ?, ?, ?)', [Imie, Nazwisko, Email, Message], (err, result) => {
+    conn.query('INSERT INTO messages (imie, nazwisko, email, wiadomosc) VALUES (?, ?, ?, ?)', [Imie, Nazwisko, Email, Message], (err, result) => {
         if (err) {
             console.error('Error inserting record:', err);
             res.status(500).send('Error saving data');
@@ -58,6 +59,34 @@ app.post('/kontakt', (req, res) => {
 
 
     res.redirect('/podziekowania');
+});
+app.get('/api/contact-messages', (req, res) => {
+    const query = "SELECT * FROM messages";
+
+    conn.query(query, (err, result) => {
+        if (err) {
+            console.error('Error', err);
+            res.status(500).send('Error retrieving data');
+            return;
+        }
+
+        res.json(result);
+    });
+});
+
+app.get('/api/contact-messages/:id', (req, res) => {
+    const id = req.params.id;
+    const query = "SELECT * FROM messages WHERE id = ?";
+
+    conn.query(query, [id], (err, result) => {
+        if (err) {
+            console.error('Error retrieving data', err);
+            res.status(500).send('Error retrieving data');
+            return;
+        }
+
+        res.json(result);
+    });
 });
 
 app.listen(port, () => {

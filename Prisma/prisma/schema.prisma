@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Wpis{
+id Int @id @default(autoincrement())
+tekstWpisu String
+tytul String
+stworzono DateTime @default(now())
+idKategoria Int
+kategoria Kategoria @relation(fields: [idKategoria],references:[id])
+komentarz Komentarz[]
+}
+model Kategoria{
+id Int @id @default(autoincrement())
+nazwa String @unique
+wpisy Wpis[]
+}
+model Komentarz{
+id Int @id @default(autoincrement())
+zawartosc String
+stworzono DateTime @default(now())
+idWpis Int
+wpis Wpis @relation(fields: [idWpis], references: [id])
+}

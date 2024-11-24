@@ -6,4 +6,14 @@ const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+app.use(express.json());
+
+const wpisRouter = require("./routes/wpis");
+const kategoriaRouter = require("./routes/kategoria");
+const komentarzRouter = require("./routes/komentarz");
+
+app.use('/api/wpis', wpisRouter);
+app.use('/api/kategoria', kategoriaRouter);
+app.use('/api/komentarz', komentarzRouter);
+
+app.listen(PORT, () => console.log(`Listening on port http://localhost:${PORT}`));

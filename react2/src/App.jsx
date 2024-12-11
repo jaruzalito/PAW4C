@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { Link, Routes, Route } from 'react-router-dom';
+import Page1 from './pages/Page1';
+import Page2 from './pages/Page2';
+import Page3 from './pages/Page3';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <div>npm
+            <nav>
+                <ul>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/page1">Page 1</Link></li>
+                    <li><Link to="/page2">Page 2</Link></li>
+                    <li><Link to="/page3">Page 3</Link></li>
+                </ul>
+            </nav>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/page1" element={<Page1 />} />
+                <Route path="/page2" element={<Page2 />} />
+                <Route path="/page3" element={<Page3 />} />
+            </Routes>
+        </div>
+    );
 }
 
-export default App
+function Home() {
+    return <h2>Home Page</h2>;
+}
+
+export default App;

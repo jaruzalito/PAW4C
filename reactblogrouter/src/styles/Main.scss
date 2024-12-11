@@ -1,0 +1,47 @@
+// src/styles/main.scss
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.app {
+  text-align: center;
+}
+h1{
+  color:blue;
+}
+#categories{
+  list-style-type: circle;
+  color:saddlebrown;
+}
+nav {
+  background-color: #333;
+  padding: 1rem;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+
+    li {
+      margin: 0 1rem;
+
+      a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+.home, .post, .categories {
+  padding: 2rem;
+}
